@@ -1,0 +1,22 @@
+{
+  "name": "playwright_endtoend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Rajamegam/playwright_end-end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Rajamegam/playwright_end-end/issues"
+  },
+  "homepage": "https://github.com/Rajamegam/playwright_end-end#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.56.0",
+    "@types/node": "^24.7.0"
+  }
+}
