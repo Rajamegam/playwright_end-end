@@ -14,6 +14,7 @@ test("endtoend", async ({ page }) => {
     // await loginform.fillpassword("password")
     // await loginform.clicksubmit()
     // await homepage.clickproductlink()
+    await page.pause()
 
 
 
