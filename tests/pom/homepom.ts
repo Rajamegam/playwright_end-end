@@ -15,6 +15,7 @@ export default class homepom {
 
     public async clickproductlink() {
         await this.productlink.first().click()
+        
     }
 
 }
