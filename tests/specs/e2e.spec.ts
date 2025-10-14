@@ -1,6 +1,8 @@
 import { test } from '@playwright/test'
 import Loginpom from '../pom/loginpom'
 import homepom from '../pom/homepom'
+import Productpom from '../pom/productpom'
+import cartpom from '../pom/cartpom'
 
 test("endtoend", async ({ page }) => {
 
@@ -15,9 +17,10 @@ test("endtoend", async ({ page }) => {
     // await loginform.clicksubmit()
     // await homepage.clickproductlink()
 
-    let homepage:homepom=await loginform.submitcredentials("raja1@gmail.com","password")
-    homepage.clickproductlink()
-    await page.pause()
+    let homepage: homepom = await loginform.submitcredentials("raja1@gmail.com", "password")
+    let productpage: Productpom = await homepage.clickproductlink()
+    let cartpage: cartpom = productpage.fillproductdetails('M', 'Green', '1')
+    //await page.pause()
 
 
 

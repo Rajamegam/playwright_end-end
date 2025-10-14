@@ -1,4 +1,5 @@
 import { Locator, Page } from "@playwright/test";
+import Productpom from "./productpom";
 
 export default class homepom {
 
@@ -13,9 +14,10 @@ export default class homepom {
 
     }
 
-    public async clickproductlink() {
+    public async clickproductlink(): Promise<Productpom> {
         await this.productlink.first().click()
-        
+        return new Productpom(this.page)
+
     }
 
 }
