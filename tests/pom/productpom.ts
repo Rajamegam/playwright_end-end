@@ -16,18 +16,15 @@ export default class Productpom {
         this.qty = this.page.locator("input[name='qty']")
         this.addToCartbtn = this.page.locator("//button[@type='button']/span[text()='ADD TO CART']")
         this.color = "(//ul[contains(@class,'variant-option-list')])[2]/li/a[text()='$$']"
-        this.size = "//div[contains(@class,'variant-container')]/div[1]/ul/li/a[text()='$$']"
+        this.size = "(//ul[contains(@class,'variant-option-list')])[1]/li/a[text()='$$']"
         //--//div[contains(@class,'variant-container')]/div[1]/ul/li/a[text()='M']
         this.viewcartbutton = this.page.locator(".add-cart-popup-button")
         this.productheader = this.page.locator(".product-single-name")
-
-
     }
 
     private createsizeLocator(sizevalue: string): Locator {
         let sizetypelocator: Locator = this.page.locator(this.size.replace('$$', sizevalue))
         return sizetypelocator
-
     }
 
     public async selectsize(sizevalue: string): Promise<Productpom> {
@@ -67,13 +64,12 @@ export default class Productpom {
     }
 
     public async fillproductdetails(size: string, color: string, quantity: string): Promise<cartpom> {
-        await this.productheader.waitFor({ state: 'visible', timeout: 10000 })
+        await this.page.waitForLoadState('domcontentloaded')
         await this.selectsize(size)
         await this.selectcolor(color)
         await this.fillquantity(quantity)
         await this.clickaddtocartbutton()
         await this.viewcartpage()
         return new cartpom(this.page)
-
     }
 }
