@@ -9,13 +9,13 @@ export default class homepom {
 
     constructor(page: Page) {
         this.page = page
-        this.productlink = this.page.getByRole("link", { name: "Nike react infinity run flyknit" })
+        this.productlink = this.page.locator("//div[@class='listing-tem'][1]/div[2]/a")
 
 
     }
 
     public async clickproductlink(): Promise<Productpom> {
-        await this.productlink.first().click()
+        await this.productlink.click()
         return new Productpom(this.page)
 
     }

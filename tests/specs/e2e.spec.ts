@@ -19,8 +19,9 @@ test("endtoend", async ({ page }) => {
 
     let homepage: homepom = await loginform.submitcredentials("raja1@gmail.com", "password")
     let productpage: Productpom = await homepage.clickproductlink()
+    await page.pause()
     let cartpage: cartpom = productpage.fillproductdetails('M', 'Green', '1')
-    //await page.pause()
+    
 
 
 

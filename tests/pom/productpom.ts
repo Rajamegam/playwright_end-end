@@ -1,4 +1,4 @@
-import { Locator, Page } from "@playwright/test";
+import { Locator, Page, expect } from "@playwright/test";
 import cartpom from "./cartpom";
 
 export default class Productpom {
@@ -8,6 +8,7 @@ export default class Productpom {
     private addToCartbtn: Locator
     private qty: Locator
     private viewcartbutton: Locator
+    private productheader: Locator
 
 
     constructor(page: Page) {
@@ -15,8 +16,10 @@ export default class Productpom {
         this.qty = this.page.locator("input[name='qty']")
         this.addToCartbtn = this.page.locator("//button[@type='button']/span[text()='ADD TO CART']")
         this.color = "(//ul[contains(@class,'variant-option-list')])[2]/li/a[text()='$$']"
-        this.size = "(//ul[contains(@class,'variant-option-list')])[1]/li/a[text()='$$']"
+        this.size = "//div[contains(@class,'variant-container')]/div[1]/ul/li/a[text()='$$']"
+        //--//div[contains(@class,'variant-container')]/div[1]/ul/li/a[text()='M']
         this.viewcartbutton = this.page.locator(".add-cart-popup-button")
+        this.productheader = this.page.locator(".product-single-name")
 
 
     }
@@ -29,7 +32,9 @@ export default class Productpom {
 
     public async selectsize(sizevalue: string): Promise<Productpom> {
         // let sizetypelocator: Locator = this.page.locator(this.size.replace('$$', sizevalue))
-        await this.createsizeLocator(sizevalue).click()
+        let sizelocator = this.createsizeLocator(sizevalue)
+        await sizelocator.click()
+        await sizelocator.locator("//parent::li[@class='selected']").waitFor({ state: 'visible' })
         return this
     }
 
@@ -40,7 +45,9 @@ export default class Productpom {
 
     public async selectcolor(colorvalue: string): Promise<Productpom> {
         //let colortypelocator: Locator = this.page.locator(this.color.replace('$$', colorvalue))
-        await this.createcolorLocator(colorvalue).click()
+        let colorlocator = this.createcolorLocator(colorvalue)
+        await colorlocator.click()
+        await colorlocator.locator("//parent::li[@class='selected']").waitFor({ state: 'visible' })
         return this
     }
 
@@ -60,6 +67,7 @@ export default class Productpom {
     }
 
     public async fillproductdetails(size: string, color: string, quantity: string): Promise<cartpom> {
+        await this.productheader.waitFor({ state: 'visible', timeout: 10000 })
         await this.selectsize(size)
         await this.selectcolor(color)
         await this.fillquantity(quantity)
