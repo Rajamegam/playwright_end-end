@@ -8,7 +8,8 @@ export default class Productpom {
     private addToCartbtn: Locator
     private qty: Locator
     private viewcartbutton: Locator
-    private productheader: Locator
+    private addtocartpopup: Locator
+
 
 
     constructor(page: Page) {
@@ -19,7 +20,7 @@ export default class Productpom {
         this.size = "(//ul[contains(@class,'variant-option-list')])[1]/li/a[text()='$$']"
         //--//div[contains(@class,'variant-container')]/div[1]/ul/li/a[text()='M']
         this.viewcartbutton = this.page.locator(".add-cart-popup-button")
-        this.productheader = this.page.locator(".product-single-name")
+        this.addtocartpopup = this.page.locator('.toast-mini-cart')
     }
 
     private createsizeLocator(sizevalue: string): Locator {
@@ -59,7 +60,9 @@ export default class Productpom {
     }
 
     public async viewcartpage(): Promise<cartpom> {
+        await this.addtocartpopup.waitFor({ state: 'visible' })
         await this.viewcartbutton.click()
+        await this.page.waitForLoadState('load')        
         return new cartpom(this.page)
     }
 
