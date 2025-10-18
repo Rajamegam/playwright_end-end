@@ -21,8 +21,13 @@ test("endtoend", async ({ page }) => {
     let productpage: Productpom = await homepage.clickproductlink()
     //await page.pause()
     let cartpage: cartpom = await productpage.fillproductdetails('M', 'Green', '1')
-    cartpage.clickcheckoutbutton()
-    
+    let product: string[][] = await cartpage.getProducts()
+    product.forEach((product) => {
+        console.log("product details are", product)
+    })
+
+    await cartpage.clickcheckoutbutton()
+
 
 
 
