@@ -3,6 +3,7 @@ import Loginpom from '../pom/loginpom'
 import homepom from '../pom/homepom'
 import Productpom from '../pom/productpom'
 import cartpom from '../pom/cartpom'
+import checkoutPom from '../pom/checkoutPom'
 
 test("endtoend", async ({ page }) => {
 
@@ -26,7 +27,12 @@ test("endtoend", async ({ page }) => {
         console.log("product details are", product)
     })
 
-    await cartpage.clickcheckoutbutton()
+    let checkout: checkoutPom = await cartpage.clickcheckoutbutton()
+    await checkout.fillform("sheir", "2312313", "adas", "city", "US", "23423", "US-CA")
+    await checkout.selectshippingmethod("Standard")
+    await checkout.clickcontinuebutton()
+    await checkout.selectpaymentmethod("cash on delivery")
+    await page.pause()
 
 
 
