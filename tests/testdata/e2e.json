@@ -1,0 +1,27 @@
+{
+    "endtoend": {
+        "login": {
+            "username": "raja1@gmail.com",
+            "password": "password"
+        },
+        "home": {
+            "productName": ""
+        },
+        "product": {
+            "size": "M",
+            "color": "Green",
+            "quantity": "1"
+        },
+        "checkout": {
+            "fullname": "sheir",
+            "Telephone": "2312313",
+            "Address": "adas",
+            "city": "city",
+            "country": "US",
+            "province": "US-CA",
+            "postcode": "23423",
+            "DeliveryMethod": "Standard",
+            "PaymentMethod": "cash on delivery"
+        }
+    }
+}
